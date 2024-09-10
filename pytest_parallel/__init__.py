@@ -18,8 +18,8 @@ from multiprocessing import Manager, Process
 #  considered unsafe as it can lead to crashes of the subprocess. See bpo-33725."
 #
 # https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods
-if sys.platform.startswith('darwin'):
-    multiprocessing.set_start_method('fork')
+# This is small fix to allow using pytest_parallel with polars as spawn is not thread safe
+multiprocessing.set_start_method('fork')
 
 __version__ = '0.1.1'
 
